@@ -1,0 +1,13 @@
+export DEBIAN_FRONTEND=noninteractive
+figlet "Installing Slurmctld on Controller"
+apt-get install -y -q  slurmctld
+mkdir -p /etc/slurm
+cat <<'EOF' > /etc/slurm/slurm.conf
+<%= slurm_config_file_content %>
+EOF
+mkdir /var/spool/slurmctld
+mkdir /var/spool/slurmd
+chown slurm:slurm /var/spool/slurmctld
+chown slurm:slurm /var/spool/slurmd
+chmod 600 /etc/slurm/slurm.conf
+systemctl enable --now slurmctld

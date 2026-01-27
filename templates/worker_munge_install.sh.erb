@@ -1,0 +1,10 @@
+export DEBIAN_FRONTEND=noninteractive
+figlet "Installing Munge on Worker"
+apt-get install -y -q munge libmunge2 libmunge-dev
+systemctl enable --now munge
+# Copy munge.key to worker
+sshpass -p "vagrant" scp -o StrictHostKeyChecking=no vagrant@controller:/home/vagrant/munge.key munge.key
+cp munge.key /etc/munge/munge.key
+chmod 600 /etc/munge/munge.key
+chown munge:munge /etc/munge/munge.key
+systemctl restart munge

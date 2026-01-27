@@ -1,0 +1,8 @@
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -y -q
+# apt-get upgrade -y -q
+apt-get install -y -q neovim lsd btop fzf bat git zsh sshpass figlet kitty-terminfo
+# Generate SSH key
+ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519
+chsh -s /bin/bash vagrant
+<%= hosts_setup %>

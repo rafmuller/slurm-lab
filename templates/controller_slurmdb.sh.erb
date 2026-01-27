@@ -1,0 +1,12 @@
+export DEBIAN_FRONTEND=noninteractive
+figlet "Installing Slurmdbd on Controller"
+apt-get install -y -q  slurmdbd
+mkdir -p /etc/slurm
+echo '<%= mariadb_pass %>' > /etc/slurm/accounting_password
+chmod 600 /etc/slurm/accounting_password
+cat <<'EOF' > /etc/slurm/slurmdbd.conf
+<%= slurmdbd_config_file_content %>
+EOF
+chmod 600 /etc/slurm/slurmdbd.conf
+chown -fr slurm:slurm /etc/slurm
+systemctl enable --now slurmdbd

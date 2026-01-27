@@ -1,0 +1,8 @@
+export DEBIAN_FRONTEND=noninteractive
+figlet "Installing Slurm on Worker"
+apt-get install -y -q slurmd
+cat <<'EOF' > /etc/slurm/slurm.conf
+<%= slurm_config_file_content %>
+EOF
+chmod 600 /etc/slurm/slurm.conf
+systemctl enable --now slurmd

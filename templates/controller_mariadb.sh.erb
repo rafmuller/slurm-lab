@@ -1,0 +1,10 @@
+export DEBIAN_FRONTEND=noninteractive
+figlet "Installing MariaDB on Controller"
+# Install MariaDB
+apt-get install -y -q mariadb-server mariadb-client
+systemctl enable --now mariadb
+# Setup Slurm Database
+mysql -e "CREATE DATABASE IF NOT EXISTS slurm_acct_db;"
+mysql -e "CREATE USER IF NOT EXISTS 'slurm'@'localhost' IDENTIFIED BY '<%= mariadb_pass %>';"
+mysql -e "GRANT ALL PRIVILEGES ON slurm_acct_db.* TO 'slurm'@'localhost';"
+mysql -e "FLUSH PRIVILEGES;"

@@ -1,0 +1,27 @@
+ClusterName=slurm-lab
+SlurmctldHost=<%= controller_hostname %>
+AuthType=auth/munge
+ProctrackType=proctrack/cgroup
+SchedulerType=sched/backfill
+SelectType=select/cons_tres
+
+SlurmUser=slurm
+StateSaveLocation=/var/spool/slurmctld
+SlurmdSpoolDir=/var/spool/slurmd
+
+SlurmctldPidFile=/var/run/slurm/slurmctld.pid
+SlurmdPidFile=/var/run/slurm/slurmd.pid
+
+AccountingStorageType=accounting_storage/slurmdbd
+AccountingStorageHost=<%= controller_hostname %>
+AccountingStorageUser=slurm
+
+<% if cluster -%>
+<% cluster.each do |name, options| -%>
+<% if name.to_s.include?('worker') -%>
+NodeName=<%= options[:hostname] %> CPUs=2 RealMemory=2046 Sockets=1 CoresPerSocket=1 ThreadsPerCore=2 State=UNKNOWN
+<% end -%>
+<% end -%>
+<% end -%>
+
+PartitionName=slurm-lab Nodes=ALL Default=YES MaxTime=120 State=UP

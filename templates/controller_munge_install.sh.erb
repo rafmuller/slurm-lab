@@ -1,0 +1,7 @@
+export DEBIAN_FRONTEND=noninteractive
+figlet "Installing Munge on Controller"
+apt-get install -y -q munge libmunge2 libmunge-dev
+systemctl enable --now munge
+cp /etc/munge/munge.key /home/vagrant/munge.key
+chmod 600 /home/vagrant/munge.key
+chown vagrant:vagrant /home/vagrant/munge.key
