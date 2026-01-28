@@ -8,5 +8,5 @@ cat <<'EOF' > /etc/slurm/slurmdbd.conf
 <%= slurmdbd_config_file_content %>
 EOF
 chmod 600 /etc/slurm/slurmdbd.conf
-chown -fr slurm:slurm /etc/slurm
+chown -fR slurm:slurm /etc/slurm
 systemctl enable --now slurmdbd

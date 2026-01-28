@@ -9,5 +9,6 @@ mkdir /var/spool/slurmctld
 mkdir /var/spool/slurmd
 chown slurm:slurm /var/spool/slurmctld
 chown slurm:slurm /var/spool/slurmd
-chmod 600 /etc/slurm/slurm.conf
+chmod 644 /etc/slurm/slurm.conf
 systemctl enable --now slurmctld
+usermod -a -G slurm vagrant
