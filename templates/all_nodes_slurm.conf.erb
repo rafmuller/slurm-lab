@@ -19,7 +19,7 @@ AccountingStorageUser=slurm
 <% if cluster -%>
 <% cluster.each do |name, options| -%>
 <% if name.to_s.include?('worker') -%>
-NodeName=<%= options[:hostname] %> CPUs=2 RealMemory=2046 Sockets=1 CoresPerSocket=1 ThreadsPerCore=2 State=UNKNOWN
+NodeName=<%= options[:hostname] %> CPUs=1 RealMemory=1954 Sockets=1 CoresPerSocket=1 ThreadsPerCore=2 State=UNKNOWN
 <% end -%>
 <% end -%>
 <% end -%>
